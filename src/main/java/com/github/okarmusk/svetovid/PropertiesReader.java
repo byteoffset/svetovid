@@ -4,6 +4,7 @@
 
 package com.github.okarmusk.svetovid;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -14,7 +15,7 @@ final class PropertiesReader {
      * Read properties from default application.properties file
      *
      * @return Properties
-     * @throws IOException
+     * @throws IOException thrown if file not found
      */
     Properties readProperties() throws IOException {
         return read(DEFAULT_PROPERTIES_FILE_NAME);
@@ -25,7 +26,7 @@ final class PropertiesReader {
      *
      * @param fileName name of file to read the properties from
      * @return Properties
-     * @throws IOException
+     * @throws IOException thrown if file not found
      */
     Properties readProperties(String fileName) throws IOException {
         return read(fileName);
@@ -36,6 +37,11 @@ final class PropertiesReader {
                 .getResourceAsStream(fileName);
 
         final var properties = new Properties();
+
+        if (inputStream == null) {
+            throw new FileNotFoundException(String.format("File %s not found.", fileName));
+        }
+
         properties.load(inputStream);
 
         return properties;

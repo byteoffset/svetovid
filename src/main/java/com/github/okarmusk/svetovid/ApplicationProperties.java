@@ -4,6 +4,8 @@
 
 package com.github.okarmusk.svetovid;
 
+import com.github.okarmusk.svetovid.exceptions.EnvironmentVariableNotFoundException;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -20,7 +22,7 @@ public final class ApplicationProperties {
             final var properties = resolveEnvironmentVariables(propertiesReader.readProperties());
 
             return new ApplicationProperties(properties);
-        } catch (IOException | EnvironmentVariableException e) {
+        } catch (IOException | EnvironmentVariableNotFoundException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -30,12 +32,12 @@ public final class ApplicationProperties {
             final var properties = resolveEnvironmentVariables(propertiesReader.readProperties(fileName));
 
             return new ApplicationProperties(properties);
-        } catch (IOException | EnvironmentVariableException e) {
+        } catch (IOException | EnvironmentVariableNotFoundException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    private static Properties resolveEnvironmentVariables(Properties properties) throws EnvironmentVariableException {
+    private static Properties resolveEnvironmentVariables(Properties properties) throws EnvironmentVariableNotFoundException {
         final var propertyNames = properties.stringPropertyNames();
 
         for (final var propertyName : propertyNames) {
