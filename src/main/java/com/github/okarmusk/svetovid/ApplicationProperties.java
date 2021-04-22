@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public final class ApplicationProperties {
-    private final static PropertiesReader propertiesReader = new PropertiesReader();
+    private final static PropertiesFileReader PROPERTIES_FILE_READER = new PropertiesFileReader();
     private final Properties properties;
 
     private ApplicationProperties(Properties properties) {
@@ -19,7 +19,7 @@ public final class ApplicationProperties {
 
     public static ApplicationProperties getFromDefaultFile() {
         try {
-            final var properties = resolveEnvironmentVariables(propertiesReader.readProperties());
+            final var properties = resolveEnvironmentVariables(PROPERTIES_FILE_READER.readProperties());
 
             return new ApplicationProperties(properties);
         } catch (IOException | EnvironmentVariableNotFoundException e) {
@@ -29,7 +29,7 @@ public final class ApplicationProperties {
 
     public static ApplicationProperties getFromFile(String fileName) {
         try {
-            final var properties = resolveEnvironmentVariables(propertiesReader.readProperties(fileName));
+            final var properties = resolveEnvironmentVariables(PROPERTIES_FILE_READER.readProperties(fileName));
 
             return new ApplicationProperties(properties);
         } catch (IOException | EnvironmentVariableNotFoundException e) {

@@ -11,12 +11,12 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PropertiesReaderTest {
+public class PropertiesFileReaderTest {
     @Test
     @DisplayName("Should read properties file from default location")
     void readPropertiesFileFromDefaultLocation() throws IOException {
         // when
-        final var propertiesReader = new PropertiesReader();
+        final var propertiesReader = new PropertiesFileReader();
         final var properties = propertiesReader.readProperties();
 
         // then
@@ -27,7 +27,7 @@ public class PropertiesReaderTest {
     @DisplayName("Should read properties file from given location")
     void readPropertiesFileFromGivenLocation() throws IOException {
         // when
-        final var propertiesReader = new PropertiesReader();
+        final var propertiesReader = new PropertiesFileReader();
         final var properties = propertiesReader.readProperties("application.properties");
 
         // then
@@ -43,7 +43,7 @@ public class PropertiesReaderTest {
 
         // when
         final var ioException = assertThrows(IOException.class, () -> {
-            final var propertiesReader = new PropertiesReader();
+            final var propertiesReader = new PropertiesFileReader();
             propertiesReader.readProperties(fileName);
         });
 

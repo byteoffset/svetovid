@@ -5,7 +5,7 @@
   <version>0.0.1</version>
   <packaging>jar</packaging>
 
-  <name>scheta</name>
+  <name>svetovid</name>
   <description>Lightweight configuration reader</description>
   <url>https://github.com/okarmusk/svetovid</url>
 
@@ -39,11 +39,11 @@
 
   <distributionManagement>
     <snapshotRepository>
-      <id>scheta</id>
+      <id>svetovid</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
-      <id>scheta</id>
+      <id>svetovid</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
     </repository>
   </distributionManagement>

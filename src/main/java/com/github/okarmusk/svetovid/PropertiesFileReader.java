@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-final class PropertiesReader {
+final class PropertiesFileReader {
     private final static String DEFAULT_PROPERTIES_FILE_NAME = "application.properties";
 
     /**
