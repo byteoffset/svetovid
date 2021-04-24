@@ -16,8 +16,8 @@ public class ApplicationPropertiesTest {
     @DisplayName("Should contains all properties from default file")
     void getAllPropertiesFromDefaultFile() {
         // given
-        final var propertyNames = Set.of("test.integer.property", "test.long.property", "test.string.property",
-                "test.url.property", "test.random.property");
+        final var propertyNames = Set.of("boolean.property", "short.property", "integer.property", "long.property",
+                "float.property", "double.property", "string.property", "url.property", "random.property", "java.home");
 
         // when
         final var applicationProperties = ApplicationProperties.ofFile();
@@ -27,10 +27,38 @@ public class ApplicationPropertiesTest {
     }
 
     @Test
+    @DisplayName("Should get property as boolean")
+    void getPropertyFromDefaultFileAsBoolean() {
+        // given
+        final var propertyName = "boolean.property";
+
+        // when
+        final var applicationProperties = ApplicationProperties.ofFile();
+        final var result = applicationProperties.getAsBoolean(propertyName);
+
+        // then
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Should get property as short")
+    void getPropertyFromDefaultFileAsShort() {
+        // given
+        final var propertyName = "short.property";
+
+        // when
+        final var applicationProperties = ApplicationProperties.ofFile();
+        final var result = applicationProperties.getAsInt(propertyName);
+
+        // then
+        assertEquals(8, result);
+    }
+
+    @Test
     @DisplayName("Should get property as integer")
     void getPropertyFromDefaultFileAsInteger() {
         // given
-        final var propertyName = "test.integer.property";
+        final var propertyName = "integer.property";
 
         // when
         final var applicationProperties = ApplicationProperties.ofFile();
@@ -44,7 +72,7 @@ public class ApplicationPropertiesTest {
     @DisplayName("Should get property as long")
     void getPropertyFromDefaultFileAsLong() {
         // given
-        final var propertyName = "test.long.property";
+        final var propertyName = "long.property";
 
         // when
         final var applicationProperties = ApplicationProperties.ofFile();
@@ -52,5 +80,33 @@ public class ApplicationPropertiesTest {
 
         // then
         assertEquals(Long.MAX_VALUE, result);
+    }
+
+    @Test
+    @DisplayName("Should get property as float")
+    void getPropertyFromDefaultFileAsFloat() {
+        // given
+        final var propertyName = "float.property";
+
+        // when
+        final var applicationProperties = ApplicationProperties.ofFile();
+        final var result = applicationProperties.getAsFloat(propertyName);
+
+        // then
+        assertEquals(32.64f, result);
+    }
+
+    @Test
+    @DisplayName("Should get property as double")
+    void getPropertyFromDefaultFileAsDouble() {
+        // given
+        final var propertyName = "double.property";
+
+        // when
+        final var applicationProperties = ApplicationProperties.ofFile();
+        final var result = applicationProperties.getAsDouble(propertyName);
+
+        // then
+        assertEquals(8888877777.9999007, result);
     }
 }

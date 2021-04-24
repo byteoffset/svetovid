@@ -17,7 +17,7 @@ final class ApplicationProperties {
         this.properties = properties;
     }
 
-    public static ApplicationProperties ofFile() {
+    static ApplicationProperties ofFile() {
         try {
             final var properties = resolveEnvironmentVariables(propertiesFileReader.readProperties());
 
@@ -38,33 +38,31 @@ final class ApplicationProperties {
         return properties;
     }
 
-    /**
-     * Get value as string
-     *
-     * @param propertyName property name
-     * @return stored value as string
-     */
-    public String getAsString(String propertyName) {
-        return properties.getProperty(propertyName);
+    boolean getAsBoolean(String propertyName) {
+        return Boolean.parseBoolean(properties.getProperty(propertyName));
     }
 
-    /**
-     * Get value as integer
-     *
-     * @param propertyName property name
-     * @return stored value as int
-     */
-    public int getAsInt(String propertyName) {
+    short getAsShort(String propertyName) {
+        return Short.parseShort(properties.getProperty(propertyName));
+    }
+
+    int getAsInt(String propertyName) {
         return Integer.parseInt(properties.getProperty(propertyName));
     }
 
-    /**
-     * Get value as long
-     *
-     * @param propertyName property name
-     * @return stored value as long
-     */
-    public long getAsLong(String propertyName) {
+    long getAsLong(String propertyName) {
         return Long.parseLong(properties.getProperty(propertyName));
+    }
+
+    float getAsFloat(String propertyName) {
+        return Float.parseFloat(properties.getProperty(propertyName));
+    }
+
+    double getAsDouble(String propertyName) {
+        return Double.parseDouble(properties.getProperty(propertyName));
+    }
+
+    String getAsString(String propertyName) {
+        return properties.getProperty(propertyName);
     }
 }

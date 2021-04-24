@@ -21,18 +21,7 @@ final class PropertiesFileReader {
         return read(DEFAULT_PROPERTIES_FILE_NAME);
     }
 
-    /**
-     * Read properties from given file
-     *
-     * @param fileName name of file to read the properties from
-     * @return Properties
-     * @throws IOException thrown if file not found
-     */
-    Properties readProperties(String fileName) throws IOException {
-        return read(fileName);
-    }
-
-    private Properties read(String fileName) throws IOException {
+    Properties read(String fileName) throws IOException {
         final var inputStream = this.getClass().getClassLoader()
                 .getResourceAsStream(fileName);
 

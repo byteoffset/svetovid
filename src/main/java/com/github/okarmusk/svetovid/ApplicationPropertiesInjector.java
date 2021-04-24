@@ -26,11 +26,23 @@ public class ApplicationPropertiesInjector {
                     final var propertyName = applicationProperty.value();
                     final var clazz = field.getType();
 
-                    if (clazz == Integer.TYPE) {
+                    if (clazz == boolean.class || clazz == Boolean.class) {
+                        final var propertyValue = applicationProperties.getAsBoolean(propertyName);
+                        field.set(instance, propertyValue);
+                    } else if (clazz == short.class || clazz == Short.class) {
+                        final var propertyValue = applicationProperties.getAsShort(propertyName);
+                        field.set(instance, propertyValue);
+                    } else if (clazz == int.class || clazz == Integer.class) {
                         final var propertyValue = applicationProperties.getAsInt(propertyName);
                         field.set(instance, propertyValue);
-                    } else if (clazz == Long.TYPE) {
+                    } else if (clazz == long.class || clazz == Long.class) {
                         final var propertyValue = applicationProperties.getAsLong(propertyName);
+                        field.set(instance, propertyValue);
+                    } else if (clazz == float.class || clazz == Float.class) {
+                        final var propertyValue = applicationProperties.getAsFloat(propertyName);
+                        field.set(instance, propertyValue);
+                    } else if (clazz == double.class || clazz == Double.class) {
+                        final var propertyValue = applicationProperties.getAsDouble(propertyName);
                         field.set(instance, propertyValue);
                     } else if (clazz == String.class) {
                         final var propertyValue = applicationProperties.getAsString(propertyName);

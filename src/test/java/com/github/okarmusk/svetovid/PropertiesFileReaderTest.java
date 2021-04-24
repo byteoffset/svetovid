@@ -24,17 +24,6 @@ public class PropertiesFileReaderTest {
     }
 
     @Test
-    @DisplayName("Should read properties file from given location")
-    void readPropertiesFileFromGivenLocation() throws IOException {
-        // when
-        final var propertiesReader = new PropertiesFileReader();
-        final var properties = propertiesReader.readProperties("application.properties");
-
-        // then
-        assertNotNull(properties);
-    }
-
-    @Test
     @DisplayName("Should throw exception if file doesn't exist")
     void cannotReadPropertiesFromNonExistingFile() {
         // given
@@ -44,7 +33,7 @@ public class PropertiesFileReaderTest {
         // when
         final var ioException = assertThrows(IOException.class, () -> {
             final var propertiesReader = new PropertiesFileReader();
-            propertiesReader.readProperties(fileName);
+            propertiesReader.read(fileName);
         });
 
         // then:
