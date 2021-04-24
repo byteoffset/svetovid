@@ -4,7 +4,7 @@
 
 Svetovid is a library what simplify reading properties from file.
 
-Library allows you to use environment variables in property file.
+Library allows using environment variables in property file.
 
 ### Properties file
 * Svetovid by default is looking for `application.properties` in `resources` directory in you Java project.
@@ -34,8 +34,13 @@ public class AuthenticationConfiguration {
     @ApplicationProperty("enable.authentication")
     private boolean isAuthenticationEnabled;
 
-    AuthenticationConfiguration() {
+    public AuthenticationConfiguration() {
         ApplicationPropertiesInjector.inject(this);
+    }
+    
+    public boolean isAuthenticationEnabled() {
+        return isAuthenticationEnabled;
     }
 }
 ```
+After creating object of `AuthenticationConfiguration` class, the property from `application.properties` file will be available to use.
