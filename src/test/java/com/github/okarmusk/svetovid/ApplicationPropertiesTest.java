@@ -20,7 +20,7 @@ public class ApplicationPropertiesTest {
                 "test.url.property", "test.random.property");
 
         // when
-        final var applicationProperties = ApplicationProperties.getFromDefaultFile();
+        final var applicationProperties = ApplicationProperties.ofFile();
 
         // then
         propertyNames.forEach(propertyName -> assertNotNull(applicationProperties.getAsString(propertyName)));
@@ -33,7 +33,7 @@ public class ApplicationPropertiesTest {
         final var propertyName = "test.integer.property";
 
         // when
-        final var applicationProperties = ApplicationProperties.getFromDefaultFile();
+        final var applicationProperties = ApplicationProperties.ofFile();
         final var result = applicationProperties.getAsInt(propertyName);
 
         // then
@@ -47,25 +47,10 @@ public class ApplicationPropertiesTest {
         final var propertyName = "test.long.property";
 
         // when
-        final var applicationProperties = ApplicationProperties.getFromDefaultFile();
+        final var applicationProperties = ApplicationProperties.ofFile();
         final var result = applicationProperties.getAsLong(propertyName);
 
         // then
         assertEquals(Long.MAX_VALUE, result);
-    }
-
-    @Test
-    @DisplayName("Should fail if trying to read non existing file")
-    void failIfReadNonExistingFile() {
-        // given
-        final var fileName = "non-existing-file.properties";
-        final var expectedExceptionMessage = String.format("File %s not found.", fileName);
-
-        // when
-        final var exception = assertThrows(RuntimeException.class,
-                () -> ApplicationProperties.getFromFile(fileName));
-
-        // then
-        assertEquals(expectedExceptionMessage, exception.getMessage());
     }
 }

@@ -9,27 +9,17 @@ import com.github.okarmusk.svetovid.exceptions.EnvironmentVariableNotFoundExcept
 import java.io.IOException;
 import java.util.Properties;
 
-public final class ApplicationProperties {
-    private final static PropertiesFileReader PROPERTIES_FILE_READER = new PropertiesFileReader();
+final class ApplicationProperties {
+    private final static PropertiesFileReader propertiesFileReader = new PropertiesFileReader();
     private final Properties properties;
 
     private ApplicationProperties(Properties properties) {
         this.properties = properties;
     }
 
-    public static ApplicationProperties getFromDefaultFile() {
+    public static ApplicationProperties ofFile() {
         try {
-            final var properties = resolveEnvironmentVariables(PROPERTIES_FILE_READER.readProperties());
-
-            return new ApplicationProperties(properties);
-        } catch (IOException | EnvironmentVariableNotFoundException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
-    public static ApplicationProperties getFromFile(String fileName) {
-        try {
-            final var properties = resolveEnvironmentVariables(PROPERTIES_FILE_READER.readProperties(fileName));
+            final var properties = resolveEnvironmentVariables(propertiesFileReader.readProperties());
 
             return new ApplicationProperties(properties);
         } catch (IOException | EnvironmentVariableNotFoundException e) {
