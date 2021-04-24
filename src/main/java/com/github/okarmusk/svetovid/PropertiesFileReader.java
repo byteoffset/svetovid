@@ -24,7 +24,6 @@ final class PropertiesFileReader {
     Properties read(String fileName) throws IOException {
         final var inputStream = this.getClass().getClassLoader()
                 .getResourceAsStream(fileName);
-
         final var properties = new Properties();
 
         if (inputStream == null) {

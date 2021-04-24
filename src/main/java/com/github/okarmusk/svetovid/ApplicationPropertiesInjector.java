@@ -12,7 +12,7 @@ public class ApplicationPropertiesInjector {
     /**
      * Method inject properties read from application.properties file
      *
-     * @param instance is object of a class, in most cases `this`
+     * @param instance is object where injection has to be done
      */
     public static void inject(Object instance) {
         final var fields = instance.getClass().getDeclaredFields();
@@ -26,32 +26,29 @@ public class ApplicationPropertiesInjector {
                     final var propertyName = applicationProperty.value();
                     final var clazz = field.getType();
 
-                    if (clazz == boolean.class || clazz == Boolean.class) {
-                        final var propertyValue = applicationProperties.getAsBoolean(propertyName);
-                        field.set(instance, propertyValue);
-                    } else if (clazz == short.class || clazz == Short.class) {
-                        final var propertyValue = applicationProperties.getAsShort(propertyName);
-                        field.set(instance, propertyValue);
-                    } else if (clazz == int.class || clazz == Integer.class) {
-                        final var propertyValue = applicationProperties.getAsInt(propertyName);
-                        field.set(instance, propertyValue);
-                    } else if (clazz == long.class || clazz == Long.class) {
-                        final var propertyValue = applicationProperties.getAsLong(propertyName);
-                        field.set(instance, propertyValue);
-                    } else if (clazz == float.class || clazz == Float.class) {
-                        final var propertyValue = applicationProperties.getAsFloat(propertyName);
-                        field.set(instance, propertyValue);
-                    } else if (clazz == double.class || clazz == Double.class) {
-                        final var propertyValue = applicationProperties.getAsDouble(propertyName);
-                        field.set(instance, propertyValue);
-                    } else if (clazz == String.class) {
-                        final var propertyValue = applicationProperties.getAsString(propertyName);
-                        field.set(instance, propertyValue);
-                    }
+                    field.set(instance, getPropertyValue(propertyName, clazz));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    private static Object getPropertyValue(String propertyName, Class<?> clazz) {
+        if (clazz == boolean.class || clazz == Boolean.class) {
+            return applicationProperties.getAsBoolean(propertyName);
+        } else if (clazz == short.class || clazz == Short.class) {
+            return applicationProperties.getAsShort(propertyName);
+        } else if (clazz == int.class || clazz == Integer.class) {
+            return applicationProperties.getAsInt(propertyName);
+        } else if (clazz == long.class || clazz == Long.class) {
+            return applicationProperties.getAsLong(propertyName);
+        } else if (clazz == float.class || clazz == Float.class) {
+            return applicationProperties.getAsFloat(propertyName);
+        } else if (clazz == double.class || clazz == Double.class) {
+            return applicationProperties.getAsDouble(propertyName);
+        } else {
+            return applicationProperties.getAsString(propertyName);
         }
     }
 }

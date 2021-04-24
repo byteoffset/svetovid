@@ -82,4 +82,24 @@ public class ApplicationPropertiesInjectorTest {
         assertEquals(8888877777.9999007, clazz.fieldDouble);
         assertEquals("foo bar baz", clazz.fieldString);
     }
+
+    @Test
+    @DisplayName("Should inject values from application.properties to annotated class fields, even from environment variable")
+    void injectValuesEvenFromEnvironmentVariablesToAnnotatedFields() {
+        // given
+        class Clazz {
+            @ApplicationProperty("java.home")
+            private String javaHome;
+
+            Clazz() {
+                ApplicationPropertiesInjector.inject(this);
+            }
+        }
+
+        // when
+        final var clazz = new Clazz();
+
+        // then
+        assertNotNull(clazz.javaHome);
+    }
 }
