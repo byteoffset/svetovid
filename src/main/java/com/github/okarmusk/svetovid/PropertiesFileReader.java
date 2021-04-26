@@ -22,16 +22,17 @@ final class PropertiesFileReader {
     }
 
     Properties read(String fileName) throws IOException {
-        final var inputStream = this.getClass().getClassLoader()
-                .getResourceAsStream(fileName);
-        final var properties = new Properties();
+        try (final var inputStream = this.getClass().getClassLoader()
+                .getResourceAsStream(fileName)) {
+            final var properties = new Properties();
 
-        if (inputStream == null) {
-            throw new FileNotFoundException(String.format("File %s not found.", fileName));
+            if (inputStream == null) {
+                throw new FileNotFoundException(String.format("File %s not found.", fileName));
+            }
+
+            properties.load(inputStream);
+
+            return properties;
         }
-
-        properties.load(inputStream);
-
-        return properties;
     }
 }
