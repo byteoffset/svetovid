@@ -13,6 +13,7 @@ final class EnvironmentVariablesResolver {
     private final static Pattern pattern = Pattern.compile("\\$\\{(?<env>\\w+)\\}");
 
     /**
+     * Replace ${...} with environment variable value
      *
      * @param s should contain environment variables names agreed with pattern ${ENV_VAR}
      * @return string with actual environment variable values

@@ -17,9 +17,19 @@ final class ApplicationProperties {
         this.properties = properties;
     }
 
-    static ApplicationProperties ofFile() {
+    static ApplicationProperties ofDefaultFile() {
         try {
-            final var properties = resolveEnvironmentVariables(propertiesFileReader.readProperties());
+            final var properties = resolveEnvironmentVariables(propertiesFileReader.read());
+
+            return new ApplicationProperties(properties);
+        } catch (IOException | EnvironmentVariableNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    static ApplicationProperties ofFile(String fileName) {
+        try {
+            final var properties = resolveEnvironmentVariables(propertiesFileReader.read(fileName));
 
             return new ApplicationProperties(properties);
         } catch (IOException | EnvironmentVariableNotFoundException e) {
