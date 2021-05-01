@@ -17,13 +17,22 @@ final class PropertiesFileReader {
      * @return Properties
      * @throws IOException thrown if file not found
      */
-    Properties readProperties() throws IOException {
-        return read(DEFAULT_PROPERTIES_FILE_NAME);
+    Properties read() throws IOException {
+        return readPropertiesFile(DEFAULT_PROPERTIES_FILE_NAME);
     }
 
+    /**
+     * Read properties from given file
+     *
+     * @return Properties
+     * @throws IOException thrown if file not found
+     */
     Properties read(String fileName) throws IOException {
-        try (final var inputStream = this.getClass().getClassLoader()
-                .getResourceAsStream(fileName)) {
+        return readPropertiesFile(fileName);
+    }
+
+    private Properties readPropertiesFile(String fileName) throws IOException {
+        try (var inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName)) {
             final var properties = new Properties();
 
             if (inputStream == null) {

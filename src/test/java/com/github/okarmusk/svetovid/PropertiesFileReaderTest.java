@@ -17,7 +17,7 @@ public class PropertiesFileReaderTest {
     void readPropertiesFileFromDefaultLocation() throws IOException {
         // when
         final var propertiesReader = new PropertiesFileReader();
-        final var properties = propertiesReader.readProperties();
+        final var properties = propertiesReader.read();
 
         // then
         assertNotNull(properties);

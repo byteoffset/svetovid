@@ -84,6 +84,29 @@ public class ApplicationPropertiesInjectorTest {
     }
 
     @Test
+    @DisplayName("Should inject values from file, based on file name to annotated primitive class fields")
+    void injectValuesFromFileToAnnotatedPrimitiveTypeFields() {
+        // given
+        class Clazz {
+            @ApplicationProperty("boolean.property")
+            private boolean fieldBoolean;
+            @ApplicationProperty("short.property")
+            private short fieldShort;
+
+            Clazz() {
+                ApplicationPropertiesInjector.inject(this, "non-default.properties");
+            }
+        }
+
+        // when
+        final var clazz = new Clazz();
+
+        // then
+        assertTrue(clazz.fieldBoolean);
+        assertEquals(8, clazz.fieldShort);
+    }
+
+    @Test
     @DisplayName("Should inject values from application.properties to annotated class fields, even from environment variable")
     void injectValuesEvenFromEnvironmentVariablesToAnnotatedFields() {
         // given

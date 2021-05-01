@@ -20,7 +20,7 @@ public class ApplicationPropertiesTest {
                 "float.property", "double.property", "string.property", "url.property", "random.property", "java.home");
 
         // when
-        final var applicationProperties = ApplicationProperties.ofFile();
+        final var applicationProperties = ApplicationProperties.ofDefaultFile();
 
         // then
         propertyNames.forEach(propertyName -> assertNotNull(applicationProperties.getAsString(propertyName)));
@@ -33,7 +33,7 @@ public class ApplicationPropertiesTest {
         final var propertyName = "boolean.property";
 
         // when
-        final var applicationProperties = ApplicationProperties.ofFile();
+        final var applicationProperties = ApplicationProperties.ofDefaultFile();
         final var result = applicationProperties.getAsBoolean(propertyName);
 
         // then
@@ -47,7 +47,7 @@ public class ApplicationPropertiesTest {
         final var propertyName = "short.property";
 
         // when
-        final var applicationProperties = ApplicationProperties.ofFile();
+        final var applicationProperties = ApplicationProperties.ofDefaultFile();
         final var result = applicationProperties.getAsInt(propertyName);
 
         // then
@@ -61,7 +61,7 @@ public class ApplicationPropertiesTest {
         final var propertyName = "integer.property";
 
         // when
-        final var applicationProperties = ApplicationProperties.ofFile();
+        final var applicationProperties = ApplicationProperties.ofDefaultFile();
         final var result = applicationProperties.getAsInt(propertyName);
 
         // then
@@ -75,7 +75,7 @@ public class ApplicationPropertiesTest {
         final var propertyName = "long.property";
 
         // when
-        final var applicationProperties = ApplicationProperties.ofFile();
+        final var applicationProperties = ApplicationProperties.ofDefaultFile();
         final var result = applicationProperties.getAsLong(propertyName);
 
         // then
@@ -89,7 +89,7 @@ public class ApplicationPropertiesTest {
         final var propertyName = "float.property";
 
         // when
-        final var applicationProperties = ApplicationProperties.ofFile();
+        final var applicationProperties = ApplicationProperties.ofDefaultFile();
         final var result = applicationProperties.getAsFloat(propertyName);
 
         // then
@@ -103,7 +103,7 @@ public class ApplicationPropertiesTest {
         final var propertyName = "double.property";
 
         // when
-        final var applicationProperties = ApplicationProperties.ofFile();
+        final var applicationProperties = ApplicationProperties.ofDefaultFile();
         final var result = applicationProperties.getAsDouble(propertyName);
 
         // then

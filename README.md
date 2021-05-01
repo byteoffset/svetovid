@@ -24,11 +24,12 @@ java.home=${JAVA_HOME}
 ```
 
 ### Usage
-* Svetovid is based on annotations. In case, when class field must be read from `application.properties`, you need to use `@ApplicationProperty` annotation with one string argument. Annotation takes one of property name.
+* Svetovid is based on annotations. In case, when class field must be read from `application.properties` or another properties file,
+  you need to use `@ApplicationProperty` annotation with one string argument. Annotation takes one of property name.
 * To inject value to your class field you have to call `ApplicationPropertiesInjector.inject`. Method takes one argument, and it is object, where injection will be done.
 
-### Example
-Please check bellow class:
+### Examples
+Reading from default `application.properties` file:
 ```
 public class AuthenticationConfiguration {
     @ApplicationProperty("enable.authentication")
@@ -44,3 +45,19 @@ public class AuthenticationConfiguration {
 }
 ```
 After creating object of `AuthenticationConfiguration` class, the property from `application.properties` file will be available to use.
+
+Reading from any other file:
+```
+public class AuthenticationConfiguration {
+    @ApplicationProperty("enable.authentication")
+    private boolean isAuthenticationEnabled;
+
+    public AuthenticationConfiguration() {
+        ApplicationPropertiesInjector.inject(this, "localhost.properties");
+    }
+    
+    public boolean isAuthenticationEnabled() {
+        return isAuthenticationEnabled;
+    }
+}
+```
