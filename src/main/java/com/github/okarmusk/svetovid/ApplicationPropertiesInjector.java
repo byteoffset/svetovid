@@ -15,7 +15,7 @@ public class ApplicationPropertiesInjector {
      * @param instance is object where injection has to be done
      */
     public static void inject(Object instance) {
-        injectApplicationProperties(instance, applicationProperties);
+        injectPropertiesToInstance(instance, applicationProperties);
     }
 
     /**
@@ -25,10 +25,10 @@ public class ApplicationPropertiesInjector {
      */
     public static void inject(Object instance, String fileName) {
         final var applicationProperties = ApplicationProperties.ofFile(fileName);
-        injectApplicationProperties(instance, applicationProperties);
+        injectPropertiesToInstance(instance, applicationProperties);
     }
 
-    private static void injectApplicationProperties(Object instance, ApplicationProperties applicationProperties) {
+    private static void injectPropertiesToInstance(Object instance, ApplicationProperties applicationProperties) {
         final var fields = instance.getClass().getDeclaredFields();
 
         for (final var field : fields) {
